@@ -1,0 +1,54 @@
+li{
+    text-align: center;
+    font-family: 'Lora', serif;
+}
+
+h1, h2, h3, h4{
+    text-align: center;
+    font-family: 'Lora', serif;
+}
+
+.thumbnail{
+    width: 300px;
+    height: 325px;
+    overflow: auto;
+}
+
+.well{
+    height: 190px;
+    overflow: auto;  
+}
+
+.wrapper{
+text-align: center;
+}
+
+.topBuff{
+margin-top: 25px;
+}
+
+#descr{
+    text-align: center;
+    font-family: 'Lora', serif;
+}
+p{
+    font-family: 'Lora', serif;
+    text-align: center;
+}
+
+#topper{
+text-align: center;
+height: 250px;
+background-image: url(../img/woodChopping.png);
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+align-content: center;
+overflow: hidden;
+}
+
+#normalWoodImg, #morningWoodImg, #zombieWoodImg, #leerWoodImg, #heartImg{
+    height: 20%;
+    width: 20%;
+}

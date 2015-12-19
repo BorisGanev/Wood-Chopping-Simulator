@@ -1,0 +1,558 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Wood Chopping Simulator</title>
+    <link rel="shortcut icon" href="../img/woodchoopingsim.ico" type="image/x-icon">
+        
+                                <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap-theme.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="../css/style.css">
+
+                                        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+                                    <!-- Latest compiled JavaScript -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="../scripts/app.js"></script>
+</head>
+<body>
+    <div id="topper">
+        <h1 style="color:white">Wood Chopping Simulator</h1>
+        <h4 style="color:white">(っ◕‿◕)っVersion Alpha 0.15</h4>
+        <audio controls loop>
+            <source src="../audio/WrappedInBlack.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    
+        <ul class="nav nav-tabs tebs">
+            <li role="presentation" class="active"><a href="#">Farming</a></li>
+            <li role="presentation"><a href="#">Reputation</a></li>
+            <li role="presentation"><a href="#">Events</a></li>
+            <li role="presentation"><a href="#">World Map</a></li>
+            <li role="presentation"><a href="#">???</a></li>
+        </ul>   
+    
+<div class="container col-md-12">
+    <div class="container col-md-2">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <b>Current Gold:</b>
+                <p id="currentGold"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Energy:</b>
+                <p id="energySupply"></p>
+            </li>
+             
+            <li class="list-group-item">
+                <b>Axe Durability:</b>
+                <p id="axeSupply"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Strength:</b>
+                <p id="currentStrength"></p>
+            </li>
+            
+                <li class="list-group-item">
+                <b>Luck:</b>
+                <p id="playerLuck"></p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container col-md-8">
+        <div class="panel panel-primary topBuff">
+          <div class="panel-heading">
+            <h3 class="panel-title">Forest</h3>
+          </div>
+            
+          <div class="panel-body">
+            <div class="container col-md-12">
+                <div class="col-md-6">
+                    <img id="normalWoodImg" style="float: left" src="../img/woodchoopingsim.png" alt='normalWoodImg'/>
+                    <h4>Normal Wood:</h4>
+                     <p id="stockpiledWood" style="text-align: center">0</p>
+                        <div class="wrapper">
+                            <button class="btn btn-default" id="chop">Normal Chop!</button>
+                        </div>
+                </div>
+                
+<!--
+                <button class="btn btn-primary" id="hireWorker">Hire Worker</button>
+                <button class="btn btn-default" id="fireWorker">Fire Worker</button>
+                <button class="btn btn-success" id="startWorking">Start Working!</button>
+                <button class="btn btn-danger" id="stopWorking">Stop Working!</button>
+-->         
+              
+                <div class="col-md-6">
+                    <img id="morningWoodImg" style="float: left" src="../img/TreeBackSlantWIP512.png" alt='morningWoodImg'/>
+                    <h4>Morning Wood:</h4>
+                    <p id="stockMorningWood" style="text-align: center">0</p>
+                        <div class="wrapper">
+                            <button class="btn btn-default disabled" id="chopMorning">Morning Chop!</button>
+                        </div>
+                </div>
+            </div>    
+                
+                <div class="container col-md-12">
+                    <div class="col-md-6">
+                        <img id="zombieWoodImg" style="float: left" src="../img/1Ut-BpuUKnjfngFOu7Rn9ZcgwdS-SSIG6Jsi3CbEhDY.png" alt='zombieWoodImg'/>
+                        <h4>Zombie Wood:</h4>     
+                        <p id="stockZombieWood" style="text-align: center">0</p>
+                            <div class="wrapper">          
+                                <button class="btn btn-default disabled" id="chopZombie">Zombie Chop!</button>
+                            </div>    
+                    </div>  
+                    
+                    <div class="col-md-6">    
+                        <img id="leerWoodImg" style="float: left" src="../img/leerWood.png" alt='leerWoodImg'/>
+                        <h4>Leer Wood:</h4>     
+                        <p id="stockLeerWood" style="text-align: center">0</p>
+                            <div class="wrapper">          
+                                <button class="btn btn-default disabled" id="chopLeer">Leer Chop!</button>
+                            </div>    
+                    </div>
+                </div> 
+              
+            </div>                  
+        </div>
+    </div>
+    
+    <div class="container col-md-2">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <b>Current Wood Market Price:</b>
+                <p id="marketWoodPrice"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Health:</b>
+                <p id="healthSupply"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Chop Speed:</b>
+                <p id="currentSpeed"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Quads:</b>
+                <p id="playerQuads"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Village Status:</b>
+                <p id="currentTownStatus"></p>
+            </li>
+        </ul>
+    </div>
+</div>
+    
+    <div class="container col-md-12">
+        <hr>
+        <h2>Town Market</h2>
+        <p id="descr">The market is the best place to earn gold selling your wood and to resupply on essential goods to make your progress proceed smoothly.</p>
+        <hr>
+        <div class="container col-sm-4">
+            <h4 style="text-align:center">Goods Buyout</h4>
+                <p id="marketWoodSellPrice"></p>
+                <p id="currentGold">Regular Lumber Merchant:</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default" id="sellWoodBtn">Sell Wood</button>
+                        <button class="btn btn-default" id="sell5WoodBtn">Sell 5 Wood</button>
+                        <button class="btn btn-default" id="sellAllWoodBtn">Sell All Wood</button>
+                    </div>    
+            <hr>
+                <p id="marketMornWoodSellPrice"></p>
+                <p>Morning Wood Merchant:</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default disabled" id="sellMornWoodBtn">Sell Wood</button>
+                        <button class="btn btn-default disabled" id="sell5MornWoodBtn">Sell 5 Wood</button>
+                        <button class="btn btn-default disabled" id="sellAllMornWoodBtn">Sell All Wood</button>
+                    </div>    
+            <hr>
+                <p id="marketZombWoodSellPrice"></p>
+                <p>Zombie Wood Merchant:</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default disabled" id="sellZombWoodBtn">Sell Wood</button>
+                        <button class="btn btn-default disabled" id="sell5ZombWoodBtn">Sell 5 Wood</button>
+                        <button class="btn btn-default disabled" id="sellAllZombWoodBtn">Sell All Wood</button>
+                    </div>
+            <hr>
+                <p id="marketLeerWoodSellPrice"></p>
+                <p>Leer Wood Merchant:</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default disabled" id="sellLeerWoodBtn">Sell Wood</button>
+                        <button class="btn btn-default disabled" id="sell5LeerWoodBtn">Sell 5 Wood</button>
+                        <button class="btn btn-default disabled" id="sellAllLeerWoodBtn">Sell All Wood</button>
+                    </div>  
+        </div>
+        
+        <div class="container col-sm-4">
+            <h4 style="text-align:center">Produce Merchant</h4>
+                <p id="marketCokeSellPrice">Energy Potion - Cost: 5 Gold - Gives: 2 Energy</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default" id="buySCokeBtn">Buy Energy Potion</button>
+                    </div>    
+            <hr>
+                <p id="marketCokeSellPrice">Coke Pack - Cost: 50 Gold - Gives: Refills Energy</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default" id="buyLCokeBtn">Buy Coke</button>
+                    </div>
+            <hr>
+                <p>Medical Flora - Cost: 250 Gold - Gives: 20 Health</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default" id="buyMedBtn">Buy Medical Flora</button>
+                    </div>
+            <hr>
+                <p>Supply Crates - Cost: 300 Gold - Gives: 10 Supplies</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default disabled" id="buySuppliesBtn">Buy Supplies</button>
+                    </div>    
+        </div>
+    
+        <div class="container col-sm-4">
+            <h4 style="text-align:center">Blacksmith</h4>
+                <p id="axeRepairPrice">Axe Repair - Cost: 50 gold</p>
+                    <div class="wrapper">
+                        <button class="btn btn-default" id="repairAxeBtn">Repair</button>
+                    </div>
+            <hr>
+        </div>   
+    </div>
+    
+    
+    <div class="container col-md-12">
+        <hr/> 
+    <h2>Upgrades</h2>
+        <p id="descr">The first stop on the gold spending tour(the most worthwhile as well). Upgrade essential skills and stats to make the wood chopping life a whole lot more worthwhile (aka easier). Upgrades are permanent and with each sequential upgrade the cost of the upgrade will be increased, so chose wisely!</p>
+    <hr/>
+        <div class="well well-sm col-md-2"> 
+            <p><b>Enchant Axe.</b> <br> (Axe Durability Upgrade: +25)</p>
+            <br>
+            <p id="axeUpgradePrice"></p>
+                <div class="wrapper">
+                    <button class="btn btn-default" id="axeUpBtn">Buy</button>
+                </div>    
+        </div>
+        
+        <div class="well well-sm col-md-2">
+            <p><b>Wrestle with Lightning.</b> <br> (Max Energy Upgrade: +25)</p>
+            <br>
+            <p id="energyUpgradePrice"></p>
+                <div class="wrapper">
+                    <button class="btn btn-default" id="energyUpBtn">Buy</button>
+                </div>    
+        </div>
+        
+        <div class="well well-sm col-md-2">
+            <p><b>Hire a Giga Trainer?!</b> <br> (Strength Upgrade: +1)</p>
+            <br>
+            <p id="strUpgradePrice"></p>
+                <div class="wrapper">
+                    <button class="btn btn-default" id="strUpBtn">Buy</button>
+                </div>    
+        </div>
+        
+        <div class="well well-sm col-md-2">
+            <p><b>Destroy Local Woodstock.</b> <br> (Wood Trade Price: +0.25)</p>
+            <br>
+            <p id="tradeUpgradePrice"></p>
+                <div class="wrapper">
+                    <button class="btn btn-default" id="tradeUpBtn">Buy</button>
+                </div>    
+        </div>
+        
+        <div class="well well-sm col-md-2">
+            <p><b>Walk the Bear.</b> <br> (Speed Upgrade: +0.10)</p>
+            <br>
+            <p id="speedUpgradePrice"></p>
+                <div class="wrapper">
+                    <button class="btn btn-default" id="speedUpBtn">Buy</button>
+                </div>    
+        </div>
+        
+        <div class="well well-sm col-md-2">
+            <p><b>Become a Masochist for a Day.</b> (Health Upgrade: +25)</p>
+            <div class="wrapper"><img id="heartImg" src="../img/heart60.png" alt="heart"></div>
+            <p id="hpUpgradePrice"></p>
+                <div class="wrapper">
+                    <button class="btn btn-default" id="hpUpBtn">Buy</button>
+                </div>    
+        </div>
+    </div>
+    
+    <div class="container col-md-12">
+        <hr>
+        <h2>Housing Upgrades</h2>
+        <p>The Housing section allows you to make various upgrades to your living quarters. The level of you living quarter will determain your status within the village. By investing in your home, you have the ability to open a variety of different and unique options down the road. Not to mention that building your own mansion is always an enjoyable thing. </p>
+        <hr>
+         <div class="container col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <b>Marble:</b>
+                <p id="marble">0</p>
+            </li>
+            
+           <li class="list-group-item">
+                <b>Stone:</b>
+                <p id="stone">0</p>
+            </li>
+                         
+            <li class="list-group-item">
+                <b>Glass:</b>
+                <p id="glass">0</p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Concrete:</b>
+                <p id="concrete">0</p>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="container col-md-6">
+        <h4>Housing Options:</h4>
+        
+        <div class="well row col-md-12">
+                <div class="caption">
+                    <h3>Upgrade your house</h3>
+                    <p>Upgrade to a larger, ancier house if you can afford it.
+                    </p>
+                    <p id="houseUpgradePrice"></p>
+                    <p><a href="#" class="btn btn-warning disabled" id="houseUpgBtn" role="button">Upgrade!</a> 
+                    </p>
+                </div>
+        </div>
+        
+        <div class="well row col-md-12">
+            <div class="caption">
+                <h3>Buy Land</h3>
+                    <p>Buy land from local land owners! 
+                    </p>
+                    <p id="landBuyPrice"></p>
+                    <p><a href="#" class="btn btn-primary disabled" id="buyLandBtn" role="button">Buy Land!</a> 
+                    </p>
+            </div>
+        </div>
+    </div>
+        
+    <div class="container col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <b>Housing Status:</b>
+                <p id="house">Shabby Hut</p>
+            </li>
+        </ul>
+    </div>     
+    
+        <div class="container col-md-12">
+            <hr>
+            <h2>Investments</h2>
+            <p id="descr">Tired of simply chopping wood like a total pleb? Well, why don't you try your hand at an investment and see how that goes. It can be a gamble most of the time, so try not to make into a habit.</p>
+            <hr/>
+            <div class="thumbnail col-md-4">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Invest in a local dung farm.</h3>
+                    <p>A local drifter has recently bought some land but is short on gold to start his dung farm.
+                        If you decide to help him out with the missing gold, you have a chance to get yourself a nice return.
+                        <br><b>Chance of return: 50% <br> Return amount: 200</b> 
+                    </p>
+                    <p id="dungInvestPrice"></p>
+                    <p><a href="#" class="btn btn-primary" id="dungInvestBtn" role="button">Invest</a> 
+                    </p>
+                </div>
+            </div>
+            
+            <div class="thumbnail col-md-4">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Invest in village tavern.</h3>
+                    <p>The tavern owner in the village has a habit of gambling. Thanks to this wonderful hobby he has inccured a large debt and                         is now desperate for some cash to pay off the people he has taken loans from. If you help him out with a small fee, he promises to pay you back double. <br><b>Chance of return: 50% <br> Return amount: 400</b>
+                    </p>
+                    <p id="tavernInvestPrice">Price: 200</p>
+                    <p><a href="#" class="btn btn-primary" id="tavernInvestBtn" role="button">Help Tavern Owner</a> 
+                    </p>
+                </div>
+            </div>
+            
+            <div class="thumbnail col-md-4">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Throw money at the goblins outside of the village.</h3>
+                    <p>Goblins love money - a well known fact. Goblins also tend to hate owing people and return funds with interest. <br> As luck would have it, there is a goblin den outside of town, so why not go throw some gold at them. Hopefully, with their strong memory, and with a bit of luck they will come back to you with some interest. Hope they aren't the gambling kind...<br><b>Chance of profits: 50% <br> Return: Random Event</b>
+                    </p>
+                    <p id="goblinInvestPrice">Price: 300</p>
+                    <p><a href="#" class="btn btn-primary" id="goblinInvestBtn" role="button">Throw Money at Goblins</a> 
+                    </p>
+                </div>
+            </div>
+            
+            <div class="thumbnail col-md-4">
+                <div class="caption">
+                    <h3>Fund a mining expedition.</h3>
+                    <p>While walking down the village center, you notice a small booth selling mining expedition shares.<br>After speaking with one of the reprsentatives, he tells you that a recent soil and stone sample brought from the nearby mountains have supposedly yeilded in traces of a rare resource called "Via-Gra", usually only found in Morning Wood or in high mountain locations. The resourse is highly sought out in cities. The problem is that the mountain the samples are from tends to be rather dangerous and the resources required to actually start mining are missing.<br> They offer anyone from the local villages a chance to purcase a stake in the mine to raise the needed money for supplies and guards. In return, those who bought a stake will receive a portion of the overall gold.
+                    </p>
+                    <p id="mineInvestPrice">Price: 400</p>
+                    <p><a href="#" class="btn btn-primary" id="mineInvestBtn" role="button">Purchase a Stake</a> 
+                    </p>
+                </div>
+            </div>
+        </div>
+      
+    <div class="container col-md-12">
+                <hr>
+                <h2>Guild Market</h2>
+                <p id="descr">A market maintained by the National Merchants Guild. It offers a variety of services which could both make you some gold or simply help you advance in the world.</p>
+                <hr>
+        
+            <div class="thumbnail col-md-4">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Buy shares in the local Quads market.</h3>
+                    <p>Buying quads from the local guild market can come in handy if you are looking to make a quick buck and or simply save the world from some being which can only be stopped with quads.<br><b>Quads can be stored and used for special events, or can be sold back to the guild for a random trade price giving you a chance to profit.</b> </p>
+                    <p id="quadsPrice"></p>
+                    <p><a href="#" class="btn btn-primary" id="quadsGetBtn" role="button">Buy Quads</a>
+                    <a href="#" class="btn btn-default" id="quadsLoseBtn" role="button">Sell Quads</a></p>
+                </div>
+            </div>
+                
+            <div class="thumbnail col-md-4">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Buy a Mystery Cart.</h3>
+                    <p>Mystery Carts - the guilds take on raffle. Mystery carts tend to come into existance when there is an large supply of certain resources in the guild stock. Myserty Carts came were made as a way to sell off these surplus supplies to make quick gold - Regular carts are filled with a variety of resources, which are later sold off to anyone willing to take a gamble with their gold.<br> Since everycart has something in it, you are at least guaranteed to make some of your money, if you don't end up making a profit.</p>
+                    <p id="mysCartPrice"></p>
+                    <p><a href="#" class="btn btn-primary disabled" id="mysCartBtn" role="button">Buy Mystery Cart</a>
+                    </p>
+                </div>        
+            </div> 
+    </div>
+    
+    
+    <div class="container col-md-12">
+        <hr>
+        <h2>Black Market</h2>
+        <p id="descr">The one and only place to gain access to some otherwise illegal actions and stocks. Also the best place to spend your money!</p>
+        <hr>
+                        <div class="thumbnail col-md-4" id="TNB">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Hire Mercenaries.</h3>
+                    <p>Ever felt like you don't get the respect you deserve? Well, the easiest way to feel better about yourself is to hire some foreign mercenaries! They are sure to scare some people and make them respect you; If not, then you can always use them to break the law in your stead!</p>
+                    <p>Price:</p>
+                    <p><a href="#" class="btn btn-primary disabled" id="mercGetBtn" role="button">Hire 1 Merc</a>
+                    <a href="#" class="btn btn-default disabled" id="merc5GetBtn" role="button">Hire 5 Mercs</a></p>
+                </div>
+            </div>
+        
+                    <div class="thumbnail col-md-4" id="TNB">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Buy Slaves.</h3>
+                    <p>Poor people dragged away from their homelands to be sold on the black market. Most of them don't really do much and still require food and water, but you can aways use them to chop wood for you (fate must really hate them).</p>
+                    <p>Price:</p>
+                    <p><a href="#" class="btn btn-primary disabled" id="slaveGetBtn" role="button">Buy Slave</a></p>
+                </div>
+            </div>
+        
+            <div class="thumbnail col-md-4" id="TNB">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Gain access to Morning Wood.</h3>
+                    <p>By greasing a few palms with some cash you can gain access to the towns protected Morning Wood. Morning wood tends to be considered sacred, so it will earn you a nice +10 gold on the usual market price of wood. Just make sure you keep greasing those palms of you might end up losing access to it in the near future.</p>
+                    <p id="mornWoodUnlockPrice">Price:</p>
+                    <p><a href="#" class="btn btn-primary" id="mornWoodUnlockBtn" role="button">Grease palms</a></p>
+                </div>
+            </div>
+            <div class="thumbnail col-md-4" id="TNB">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Buy a Cursed Artifact.</h3>
+                    <p>The continent has known many different civilizations throughout it's rich history. With a huge increase in grave robbers and relic hunters as of late, many ancient artifacts have made their way to the black market.<br> Each of these artifact on sale is said to have a "curse" placed on it.<br>The merchant assurses that some of there "curses" could bring about good fortune to the owner, so if you are up for gambling with your money and life, then why not purchase one for yourself. You could end up pleasantly surprised...or dead.</p>
+                    <p>Price:</p>
+                    <p><a href="#" class="btn btn-primary disabled" id="buyArtifactBtn" role="button">Buy Cursed Artifact</a></p>
+                </div>
+            </div>
+    </div>
+    
+    <div class="container col-md-12">
+        <hr>
+        <h2>The Underground</h2>
+        <p id="descr"><b>WARNING:</b> By completeing underground events you will earn notoriety, which in time, if it gets high enough, could cause you some serious problems with the law and the villagers!</p>
+        <hr>
+            <div class="thumbnail col-md-4" id="TNB">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Fight in the "Pitts of Blood".</h3>
+                    <p>The "Pitts of Blood" is the name of the local underground fighting circut hosted by corrupt officials for the all of the "good" folks which enjoy watching a bit of bloodshed amongst desprate contenders eager to earn some quick gold.<br>
+                    It's far from the most enjoyable place in the world, but it will help you get over a financial bump or two - if you survive that is.</p>
+                    <b><p id="pittsReq"></p></b>
+                    <p><a href="#" class="btn btn-primary" id="pittFightBtn" role="button">Fight in Pitts</a></p>
+                </div>
+            </div>
+        
+            <div class="thumbnail col-md-4" id="TNB">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Steal from Village Homes.</h3>
+                    <p>With this action you can officially become a lowlife! You will literally be going around the village and stealing from the kind citizens who call you their neighbor!<br> At least you will be able to earn some quick gold from it.<br> <b>WARNING: If you end up being caught then you will recieve an increase in notoriety(+20)</b></p>
+                    <b><p>Requirements: 25 Energy,<br> Notoriety below 100.</p></b>
+                    <p><a href="#" class="btn btn-primary" id="robHouseBtn" role="button">Rob Houses</a></p>
+                </div>
+            </div>
+            <div class="thumbnail col-md-4" id="TNB">
+<!--                <img src="..." alt="...">-->
+                <div class="caption">
+                    <h3>Ambush Merchant Caravans.</h3>
+                    <p>Team up with a local band of thiefs to ambush one of the merchant convoys leaving the village. If successful you will receive not only gold, but also various supplies, which makes it worth your time.<br><b>WARNING: If you end up being caught then you will recieve an increase in notoriety(+50) and possibly lose all of your gold, or even worse get killed!</b></p>
+                    <p>Requirements:</p>
+                    <p><a href="#" class="btn btn-primary disabled" id="ambushMerchBtn" role="button">Ambush Merchants</a></p>
+                </div>
+            </div>
+        
+    <div class="container col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <b>Notoriety:</b>
+                <p id="notoriety"></p>
+            </li>
+            
+           <li class="list-group-item">
+                <b>Wanted Level:</b>
+                <p id="wantedLevel"></p>
+            </li>
+                         
+            <li class="list-group-item">
+                <b>Body Count:</b>
+                <p id="bodyCount"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Arena Status:</b>
+                <p id="arenaStatus"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Win/Loss Record:</b>
+                <p id="wLRecord"></p>
+            </li>
+            
+            <li class="list-group-item">
+                <b>Glory Points:</b>
+                <p id="gloryPoints"></p>
+            </li>
+        </ul>
+    </div>    
+</div>
+    
+
+    
+</body>
+</html>
